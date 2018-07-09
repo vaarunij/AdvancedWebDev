@@ -1,39 +1,42 @@
- <? session_start();
-     $_SESSION['id'] = $userData['user_id'];
-	 
-    //$user_id =  $_SESSION['id'];
-	
-require_once("DemoDB.php");
- 
-// Attempt select query execution
-try{
-    $sql = "SELECT * FROM usergroup";   
-    $result = $pdo->query($sql);
-    if($result->rowCount() > 0){
+
+      <?php
+    error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
+    session_start();
+    if ($_SERVER["REQUEST_METHOD"] == "GET") {
+        do_get();
+    } else {
+        do_post();
+    }
+
+    function do_get() {
+        global $msg;
+        require_once "GroupModel.php";
+        $i=0;
+        $result = GroupModel::getGroups();
         echo "<table>";
             echo "<tr>";
                 echo "<th>id</th>";
                 echo "<th>Group name</th>";
                 echo "<th>Join</th>";
             echo "</tr>";
-        while($row = $result->fetch()){
-            echo "<tr>";
-                echo "<td>" . $row['group_id'] . "</td>";
-                echo "<td>" . $row['first_name'] . "</td>";
-                echo "<a href="joingroup.php?group_id=<?php echo $row['group_id']; ?>">CLICK</a>";
+          while($i<count($result)){
+             // print_r($result);
+
+             echo $result[$i]['name'];
+             echo "<br>";
+             
+             echo "<tr>";
+                echo "<td>" . $result[$i]['group_id'] . "</td>";
+                echo "<td>" . $result[$i]['name'] . "</td>";
+                echo "<td align=center width=100><a href='joingroup.php?group_id=".$result[$i]['group_id'] ."'>Click</a></td>";
+
             echo "</tr>";
-        }
-        echo "</table>";
-        // Free result set
-        unset($result);
-    } else{
-        echo "No records matching your query were found.";
+            $i++;
+          }  
+            echo "</table>";
+        
+
     }
-} catch(PDOException $e){
-    die("ERROR: Could not able to execute $sql. " . $e->getMessage());
-}
- 
-// Close connection
-unset($pdo);
-   
-  ?>
+    function do_post() {
+
+    }

@@ -1,22 +1,29 @@
-<?php
-session_start()
-require_once("DemoDB.php");
-  
-  $user_id =  $_SESSION['id'];
-  $group_id = $_GET['group_id'];
-  $date = date('Y-m-d H:i:s');
-  
-
-  
-    try {
-        $statement = $link->prepare("INSERT INTO group_member(user_id,group_id,validated_at)
-            VALUES(?,?,?)");
-        $statement->execute(array($user_id, $group_id, $date));
-    } 
-	catch(PDOException $e) {
-        echo $e->getMessage();
-    }
-  
+  <?php
+  require_once("SqlSkillsDB.php");
+  session_start();
+  if ($_SERVER["REQUEST_METHOD"] == "GET") {
+      do_post();
+  }
 
 
-?>
+  function do_post() {
+          global $msg;
+          require_once "GroupModel.php";
+            $user =  $_SESSION['user'];
+            $group_id = $_GET['group_id'];
+            $date = date('Y-m-d H:i:s');
+            $user_id = $user['user_id'];
+            try {
+              $ok = GroupModel::postGroup($user_id,$group_id,$date);
+              if ($ok == 1) {
+                $msg = "Group join successfull";
+              }
+            } catch (Exception $e) {
+              $msg = "You have already joined a group";
+            }
+
+            echo $msg;
+                        
+      }
+    
+  ?>
