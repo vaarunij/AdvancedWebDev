@@ -2,26 +2,27 @@
   require_once("SqlSkillsDB.php");
   session_start();
   if ($_SERVER["REQUEST_METHOD"] == "GET") {
-      do_post();
+      do_get();
   }
 
 
-  function do_post() {
+  function do_get() {
           global $msg;
           require_once "UserModel.php";
-            $user =  $_SESSION['user'];
-            $group_id = $_GET['group_id'];
+            $token = $_GET['code'];
             $date = date('Y-m-d H:i:s');
-            $user_id = $user['user_id'];
             try {
-              $ok = UserModel::postGroup($user_id,$group_id,$date);
-              if ($ok == 1) {
-                $msg = "Group join successfull";
+              $user = UserModel::updateUserByToken($token,$date);
+              if ($user == 1) {
+                $msg = "Account verified";
+              }
+              else{
+                $msg = "Invalid token";
               }
             } catch (Exception $e) {
-              $msg = "You have already joined a group";
+              $msg = "Invalid token";
             }
-
+            
             echo $msg;
                         
       }

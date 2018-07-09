@@ -48,7 +48,12 @@ function do_post() {
         } else {
             $user = UserModel::getByLoginPassword($email, $password);
             if ($user != null) {
-                $_SESSION["user"] = $user;
+                if ($user['validated_at']) {
+                    $_SESSION["user"] = $user;
+                }
+                else{
+                    $msg = "Please verify your account";
+                }
             } else {
                 $msg = "Invalid password or user unknow";
             }

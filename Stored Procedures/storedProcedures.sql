@@ -59,14 +59,14 @@ use DELIMITER $$
 		('auction','diagram_path','creation_script_path','Auction is a DB which contains an auction and bid for certain products.');
 
 		INSERT INTO sql_quiz(quiz_id,author_id,title,is_public,db_name) VALUES
-		(1,2,'Select query','True','auction'),
-		(2,3,'Create query','True','auction');
+		(1,2,'Select query',1,'auction'),
+		(2,3,'Create query',1,'auction');
 
 
 		INSERT INTO sql_question(question_id,db_name,question_text,correct_answer,correct_result,theme_id,author_id,is_public) VALUES
-		(1,'auction','Perform select opertaion on table bid','SELECT * from bid','(1,4,17.0,2018-09-19 00:00:00),(2,3,9.0,2018-07-10 00:00:00)',1,2,'True'),
-	    (2,'auction','Perform delete opertaion on table row where id = 1','DELETE  from bid where id = 1','1 Row modified',1,3,'True'),
-        (3,'auction','Perform delete opertaion on table row where id = 1','DELETE  from bid where id = 1','1 Row modified',1,3,'True');
+		(1,'auction','Perform select opertaion on table bid','SELECT * from bid','(1,4,17.0,2018-09-19 00:00:00),(2,3,9.0,2018-07-10 00:00:00)',1,2,1),
+	    (2,'auction','Perform delete opertaion on table row where id = 1','DELETE  from bid where id = 1','1 Row modified',1,3,1),
+        (3,'auction','Perform delete opertaion on table row where id = 1','DELETE  from bid where id = 1','1 Row modified',1,3,1);
 
 		INSERT INTO sql_quiz_question(question_id,quiz_id,rank) VALUES
 		(1,1,5),
@@ -83,11 +83,11 @@ use DELIMITER $$
 
 
 		INSERT INTO sql_answer (question_id,trainee_id,evaluation_id,answer,result,gives_correct_result) VALUES
-		(1,1,1,'SELECT * from bid','(1,4,17.0,2018-09-19 00:00:00),(2,3,9.0,2018-07-10 00:00:00)','True'),
-		(2,4,2,'SELECT * from bid','(1,4,17.0,2018-09-19 00:00:00),(2,3,9.0,2018-07-10 00:00:00)','False');
+		(1,1,1,'SELECT * from bid','(1,4,17.0,2018-09-19 00:00:00),(2,3,9.0,2018-07-10 00:00:00)',1),
+		(2,4,2,'SELECT * from bid','(1,4,17.0,2018-09-19 00:00:00),(2,3,9.0,2018-07-10 00:00:00)',0);
 
 
 		COMMIT;
 	END$$
 
-	CALL exam_reset(NOW()) $$
+CALL exam_reset(NOW()) $$
