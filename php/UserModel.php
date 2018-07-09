@@ -21,7 +21,16 @@ class UserModel {
         $ok = $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-
+    public static function getByEmail($email) {
+        $db = SqlSkillsDB::getConnection();
+        $sql = "SELECT *
+              FROM user
+              WHERE email = :email";
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(":email", $email);
+        $ok = $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
     public static function getByLoginPassword($email, $password) {
         $db = SqlSkillsDB::getConnection();
         $sql = "SELECT user_id, name, pwd
@@ -32,6 +41,23 @@ class UserModel {
         $stmt->bindValue(":password", $password);
         $ok = $stmt->execute();
 				return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public static function postRegister($email, $password,$name,$first_name,$token) {
+        $db = SqlSkillsDB::getConnection();
+
+        $sql = "INSERT INTO user (email, pwd, name, first_name,token) VALUES (:email, :password, :name,:first_name,:token)";
+
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(":email", $email);
+        $stmt->bindValue(":password", $password);
+        $stmt->bindValue(":name", $name);
+        $stmt->bindValue(":first_name", $first_name);
+        $stmt->bindValue(":token", $token);
+
+        $ok = $stmt->execute();
+        
+        // return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
 }

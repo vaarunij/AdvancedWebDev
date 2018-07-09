@@ -12,6 +12,7 @@ class SqlSkillsDB {
     $bdd = new PDO($dsn, $user, $password);
     // Set communication in utf-8
     $bdd->exec("SET character_set_client = 'utf8'");
+    $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     return $bdd;
   }
 }
