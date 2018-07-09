@@ -11,7 +11,7 @@ require_once("DemoDB.php");
     try {
         $statement = $link->prepare("INSERT INTO group_member(user_id,group_id,validated_at)
             VALUES(?,?,?)");
-        $statement->execute(array($user_id ,$group_id, $date));
+        $statement->execute(array($user_id, $group_id, $date));
     } 
 	catch(PDOException $e) {
         echo $e->getMessage();
