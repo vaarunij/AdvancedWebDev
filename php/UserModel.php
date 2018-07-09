@@ -6,11 +6,6 @@ require_once("SqlSkillsDB.php");
  * Put here the methods like getBySomeCriteriaSEarch */
 class UserModel {
 
-    /** Get person data for id $personId
-     * (here demo with a SQL request about an existing table)
-     * @param int $personId id of the quizz to be retrieved
-     * @return associative_array table row
-     */
     public static function get($userId) {
         $db = SqlSkillsDB::getConnection();
         $sql = "SELECT user_id, name
@@ -33,16 +28,6 @@ class UserModel {
         $ok = $stmt->execute();
         $count = $stmt->rowCount();
         return $count;
-    }
-     public static function getGroups() {
-        $db = SqlSkillsDB::getConnection();
-        $sql = "SELECT *
-              FROM usergroup";
-              
-        $stmt = $db->prepare($sql);
-        $ok = $stmt->execute();
-        //echo $ok;
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function getByEmail($email) {
@@ -86,22 +71,6 @@ class UserModel {
         // return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public static function postGroup($user_id, $group_id,$validated_at) {
-        $db = SqlSkillsDB::getConnection();
-
-        $sql = "INSERT INTO group_member (user_id,group_id,validated_at) VALUES (:user_id, :group_id, :validated_at)";
-
-        $stmt = $db->prepare($sql);
-        $stmt->bindValue(":user_id", $user_id);
-        $stmt->bindValue(":group_id", $group_id);
-        $stmt->bindValue(":validated_at", $validated_at);
-
-        $ok = $stmt->execute();
-        echo "string";
-        echo $ok;
-        return $ok;
-        // return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
 }
 
 ?>

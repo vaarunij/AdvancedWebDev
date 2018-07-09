@@ -8,13 +8,13 @@
 
   function do_post() {
           global $msg;
-          require_once "UserModel.php";
+          require_once "GroupModel.php";
             $user =  $_SESSION['user'];
             $group_id = $_GET['group_id'];
             $date = date('Y-m-d H:i:s');
             $user_id = $user['user_id'];
             try {
-              $ok = UserModel::postGroup($user_id,$group_id,$date);
+              $ok = GroupModel::postGroup($user_id,$group_id,$date);
               if ($ok == 1) {
                 $msg = "Group join successfull";
               }

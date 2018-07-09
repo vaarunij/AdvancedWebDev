@@ -10,9 +10,9 @@
 
     function do_get() {
         global $msg;
-        require_once "UserModel.php";
+        require_once "GroupModel.php";
         $i=0;
-        $result = UserModel::getGroups();
+        $result = GroupModel::getGroups();
         echo "<table>";
             echo "<tr>";
                 echo "<th>id</th>";
