@@ -16,14 +16,14 @@
             try {
               $ok = GroupModel::postGroup($user_id,$group_id,$date);
               if ($ok == 1) {
-                $msg = "Group join successfull";
+                $msg = "Group join successfully";
               }
             } catch (Exception $e) {
               $msg = "You have already joined a group";
             }
 
             echo $msg;
-                        
+
       }
-    
+
   ?>
