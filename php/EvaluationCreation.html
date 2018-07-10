@@ -6,8 +6,8 @@
 
 <form id='userForm'>
     <div>
-        <p>Enter a Quiz</p>
-        <input type='text' id="quizname" placeholder='Quiz Name'/></div>
+        <p>Enter an Evaluation Number</p>
+        <input type='text' id="evalId" placeholder='Evaluation Number'/></div>
         <div><input type='submit' value='Submit' /></div>
     </div>
 </form>
@@ -21,16 +21,16 @@
 $(document).ready(function(){
     $('#userForm').submit(function(){
         $('#response').html("<b>Loading response...</b>");
-        let quizVal = document.getElementById('quizname').value;
-        console.log(quizVal);
+        let evalId = document.getElementById('evalId').value;
+        console.log("AJAX call");
         $.ajax({
             type: 'POST',
-            url: 'QuizController.php/',
+            url: 'EvaluationController.php/',
             data: {
-                'author_id': 2,
-                'title': quizVal,
-                'is_public': 0,
-                'db_name': 'auction'
+                'evaluation_id': evalId,
+                'group_id': 2,
+                'trainer_id': 2,
+                'quiz_id': 1
             }
             // data: $(this).serialize()
         })

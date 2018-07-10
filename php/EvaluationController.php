@@ -1,25 +1,25 @@
 <?php
 require_once("SqlSkillsDB.php");
-require_once("QuizModel.php");
+require_once("EvaluationModel.php");
 
 session_start();
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
-    echo "GET GET GET";
+    // echo "GET GET GET";
     do_get();
 } else {
-    echo "POST POST POST";
+    // echo "POST POST POST";
     do_post();
 }
 
 function do_get() {
         global $msg;
-        require_once "QuizModel.php";
+        require_once "EvaluationModel.php";
           $user =  $_SESSION['user'];
           $group_id = $_GET['group_id'];
           $date = date('Y-m-d H:i:s');
           $user_id = $user['user_id'];
           try {
-            $ok = QuizModel::getQuizzes();
+            $ok = EvaluationModel::getEvaluation();
             if ($ok == 1) {
               $msg = "Returned values";
             }
@@ -30,20 +30,20 @@ function do_get() {
     }
 
 function do_post() {
-        echo "DO POST";
+        // echo "DO POST";
         global $msg;
-        require_once "QuizModel.php";
+        require_once "EvaluationModel.php";
           $user =  $_SESSION['user'];
           $group_id = $_GET['group_id'];
           $date = date('Y-m-d H:i:s');
           $user_id = $user['user_id'];
           try {
-            $ok = QuizModel::postQuizzes();
+            $ok = EvaluationModel::postEvaluation();
             if ($ok == 1) {
-              $msg = "Quiz created successfully";
+              $msg = "Evaluation created successfully";
             }
           } catch (Exception $e) {
-            $msg = $e;
+            $msg = "This evaluation id is already taken";
           }
           echo $msg;
     }
