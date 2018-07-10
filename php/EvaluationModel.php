@@ -1,8 +1,6 @@
 <?php
 require_once 'SqlSkillsDB.php';
-
 class EvaluationModel {
-
      public static function getEvaluation() {
         $db = SqlSkillsDB::getConnection();
         $sql = "SELECT * FROM evaluation";
@@ -10,7 +8,6 @@ class EvaluationModel {
         $ok = $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
     public static function postEvaluation() {
         $db = SqlSkillsDB::getConnection();
         $evaluation_id = $_POST['evaluation_id'];
@@ -19,7 +16,6 @@ class EvaluationModel {
         $quiz_id = $_POST['quiz_id'];
         $scheduled_at = date('Y-m-d H:i:s');
         $ending_at = date('Y-m-d H:i:s');
-
         $sql = "INSERT INTO evaluation(evaluation_id, group_id, trainer_id, quiz_id, scheduled_at, ending_at)
             VALUES (:evaluation_id, :group_id, :trainer_id, :quiz_id, :scheduled_at, :ending_at)";
         $stmt = $db->prepare($sql);
