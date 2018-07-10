@@ -6,8 +6,16 @@
 
 <form id='userForm'>
     <div>
-        <p>Enter an Evaluation Number</p>
-        <input type='text' id="evalId" placeholder='Evaluation Number'/></div>
+        <p>Search for an Evaluation</p>
+        <input type='text' id="evalIdGet" placeholder='Evaluation Number'/></div>
+        <div><input type='submit' value='Submit' /></div>
+    </div>
+</form>
+
+<form id='userForm2'>
+    <div>
+        <p>Create an evaluation</p>
+        <input type='text' id="evalIdPost" placeholder='Evaluation Number'/></div>
         <div><input type='submit' value='Submit' /></div>
     </div>
 </form>
@@ -19,15 +27,15 @@
 <script>
 
 $(document).ready(function(){
-    $('#userForm').submit(function(){
+    $('#userForm2').submit(function(){
         $('#response').html("<b>Loading response...</b>");
-        let evalId = document.getElementById('evalId').value;
+        let evalIdPost = document.getElementById('evalIdPost').value;
         console.log("AJAX call");
         $.ajax({
             type: 'POST',
             url: 'EvaluationController.php/',
             data: {
-                'evaluation_id': evalId,
+                'evaluation_id': evalIdPost,
                 'group_id': 2,
                 'trainer_id': 2,
                 'quiz_id': 1
