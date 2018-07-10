@@ -19,16 +19,23 @@
             echo "<tr>";
                 echo "<th>Question</th>";
                 echo "<th>Student answer</th>";
-                echo "<th>Correct answer</th>";                
-            echo "</tr>";
-          echo $result;  
+                echo "<th>Correct answer</th>";  
+                echo "<th>Evaluation</th>";                
+            echo "</tr>"; 
           while($i<count($result)){
              
              echo "<tr>";
                 echo "<td>" . $result[$i]['question_text'] . "</td>";
                 echo "<td>" . $result[$i]['answer'] . "</td>";
                 echo "<td>" . $result[$i]['correct_answer'] . "</td>";
-
+                $v = '';
+                if ($result[$i]) {
+                    $v = 'True';
+                }
+                else{
+                    $v = 'False';
+                }
+                echo "<td>" . $v . "</td>";
                 
             echo "</tr>";
             $i++;

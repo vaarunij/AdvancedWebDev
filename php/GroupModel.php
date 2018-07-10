@@ -29,8 +29,7 @@ class GroupModel {
         $stmt->bindValue(":validated_at", $validated_at);
 
         $ok = $stmt->execute();
-        echo "string";
-        echo $ok;
+
         return $ok;
         // return $stmt->fetch(PDO::FETCH_ASSOC);
     }

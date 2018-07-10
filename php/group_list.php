@@ -22,7 +22,6 @@
           while($i<count($result)){
              // print_r($result);
 
-             echo $result[$i]['name'];
              echo "<br>";
              
              echo "<tr>";

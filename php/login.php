@@ -37,6 +37,7 @@ function do_get() {
 function do_post() {
     global $msg;
     require_once "UserModel.php";
+    require_once "TrainerModel.php";
     if (array_key_exists("action", $_POST) && $_POST["action"] == "disconnect") {
         $_SESSION = array();
         session_destroy();
@@ -50,6 +51,13 @@ function do_post() {
             if ($user != null) {
                 if ($user['validated_at']) {
                     $_SESSION["user"] = $user;
+                    $u = TrainerModel::getTrainer($user['user_id']);
+                    if($u!=null){
+                        header('Location: evaluation_list.php');
+                    }else{
+                        header('Location: group_list.php');
+                    }
+
                 }
                 else{
                     $msg = "Please verify your account";
