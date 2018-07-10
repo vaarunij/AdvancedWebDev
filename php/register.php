@@ -69,7 +69,7 @@
             $password2 = $_POST["password2"];
             $name = $_POST["name"];
             $first_name = $_POST["first_name"];
-            $token = bin2hex(random_bytes(30));
+            $token = bin2hex(random_bytes(5));
             if (empty($email) || empty($password1)|| empty($password2) || empty($name) || empty($first_name)) {
                 $msg = "fields must be filled";
             } else {
@@ -83,7 +83,7 @@
 
                         $to=$email;
                         $subject="Email verification";
-                        $body='Click this link to verify <br/> <br/> <a href="http://localhost:8888/web-exercices/adv-php/verify.php?code=' . $token .'/a>';
+                        $body='Click this link to verify <br/> <br/> "http://localhost:8888/web-exercices/adv-php/verify.php?code=' . $token;
 
                         sendEmail($to,$subject,$body);
                         $msg= "Registration successful, please activate email."; 
