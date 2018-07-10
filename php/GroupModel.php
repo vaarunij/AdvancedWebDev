@@ -5,9 +5,6 @@ require_once("SqlSkillsDB.php");
 /** Access to the person table.
  * Put here the methods like getBySomeCriteriaSEarch */
 class GroupModel {
-
-
-
      public static function getGroups() {
         $db = SqlSkillsDB::getConnection();
         $sql = "SELECT *
