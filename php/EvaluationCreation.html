@@ -1,22 +1,23 @@
 <html>
     <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     </head>
 <body>
 
 
 <form id='userForm'>
-    <div>
-        <p>Search for an Evaluation</p>
-        <input type='text' id="evalIdGet" placeholder='Evaluation Number'/></div>
-        <div><input type='submit' value='Submit' /></div>
+    <div class="form-group col-md-4">
+        <label for="evalIdGet">Search for an evaluation</label>
+        <input type='text' class="form-control" id="evalIdGet" placeholder='Evaluation Number'/>
+        <button type='submit' class="btn btn-md btn-outline-primary">Search</button>
     </div>
 </form>
 
 <form id='userForm2'>
-    <div>
-        <p>Create an evaluation</p>
-        <input type='text' id="evalIdPost" placeholder='Evaluation Number'/></div>
-        <div><input type='submit' value='Submit' /></div>
+    <div class="form-group col-md-4">
+        <label for="evalIdPost">Create an evaluation</label>
+        <input type='text' class="form-control" id="evalIdPost" placeholder='Evaluation Number'/>
+        <button type='submit' class="btn btn-md btn-outline-success">Create</button>
     </div>
 </form>
 
@@ -25,6 +26,31 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js "></script>
 <script>
+
+$(document).ready(function(){
+    $('#userForm').submit(function(){
+        $('#response').html("<b>Loading response...</b>");
+        let evalIdGet = document.getElementById('evalIdGet').value;
+        console.log("AJAX call");
+        $.ajax({
+            type: 'GET',
+            url: 'EvaluationController.php/',
+            data: {
+                'evaluation_id': evalIdGet
+            }
+            // data: $(this).serialize()
+        })
+        .done(function(data){
+            // show the response
+            $('#response').html(data);
+        })
+        .fail(function() {
+           // alert( "Posting failed." );
+        });
+       // to prevent refreshing the whole page page
+        return false;
+    });
+});
 
 $(document).ready(function(){
     $('#userForm2').submit(function(){

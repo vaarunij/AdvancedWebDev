@@ -6,6 +6,7 @@ class EvaluationModel {
         $sql = "SELECT * FROM evaluation";
         $stmt = $db->prepare($sql);
         $ok = $stmt->execute();
+        echo "Successful Get";
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     public static function postEvaluation() {
@@ -26,8 +27,8 @@ class EvaluationModel {
         $stmt->bindValue(":scheduled_at", $scheduled_at);
         $stmt->bindValue(":ending_at", $ending_at);
         $ok = $stmt->execute();
-        echo "string";
-        echo $ok;
+        echo "Successful Post";
+        //echo $ok;
         // return $ok;
         // return $stmt->fetch(PDO::FETCH_ASSOC);
         // getQuizzes();

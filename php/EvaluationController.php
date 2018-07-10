@@ -4,10 +4,9 @@ require_once("EvaluationModel.php");
 
 session_start();
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
-    // echo "GET GET GET";
-    do_get();
+    $returnVal = do_get();
+    echo $returnVal;
 } else {
-    // echo "POST POST POST";
     do_post();
 }
 
@@ -20,8 +19,9 @@ function do_get() {
           $user_id = $user['user_id'];
           try {
             $ok = EvaluationModel::getEvaluation();
+
             if ($ok == 1) {
-              $msg = "Returned values";
+             $msg = "Returned values";
             }
           } catch (Exception $e) {
             $msg = $e;
