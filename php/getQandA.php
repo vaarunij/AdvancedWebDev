@@ -11,22 +11,25 @@
 
     function do_get() {
         global $msg;
-        require_once "VevaluationModel.php";
+        require_once "QandAModel.php";
+        $tr_id = $_GET['tr_id'];
         $i=0;
-        $result = VevaluationModel::getEvaluation();
+        $result = QandAModel::getQandA($tr_id);
         echo "<table>";
             echo "<tr>";
-                echo "<th>Evaluation id</th>";
-                echo "<th>Click</th>";
+                echo "<th>Question</th>";
+                echo "<th>Student answer</th>";
+                echo "<th>Correct answer</th>";                
             echo "</tr>";
-            
+          echo $result;  
           while($i<count($result)){
              
              echo "<tr>";
-                echo "<td>" . $result[$i]['evaluation_id'] . "</td>";
+                echo "<td>" . $result[$i]['question_text'] . "</td>";
+                echo "<td>" . $result[$i]['answer'] . "</td>";
+                echo "<td>" . $result[$i]['correct_answer'] . "</td>";
 
-                echo "<td align=center width=100><a href='studentlist.php?eval_id=".$result[$i]['evaluation_id'] ."'>Click</a></td>";
-
+                
             echo "</tr>";
             $i++;
           }  

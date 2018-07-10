@@ -11,22 +11,23 @@
 
     function do_get() {
         global $msg;
-        require_once "VevaluationModel.php";
+        require_once "StudentModel.php";
+        $eval_id = $_GET['eval_id'];
         $i=0;
-        $result = VevaluationModel::getEvaluation();
+        $result = StudentModel::getStudents($eval_id);
         echo "<table>";
             echo "<tr>";
-                echo "<th>Evaluation id</th>";
-                echo "<th>Click</th>";
+                echo "<th>Id</th>";
+                echo "<th>Action</th>";
+                
             echo "</tr>";
             
           while($i<count($result)){
              
              echo "<tr>";
-                echo "<td>" . $result[$i]['evaluation_id'] . "</td>";
-
-                echo "<td align=center width=100><a href='studentlist.php?eval_id=".$result[$i]['evaluation_id'] ."'>Click</a></td>";
-
+                echo "<td>" . $result[$i]['trainee_id'] . "</td>";
+                echo "<td align=center width=100><a href='getQandA.php?tr_id=".$result[$i]['trainee_id'] ."'>Click</a></td>";
+                
             echo "</tr>";
             $i++;
           }  
